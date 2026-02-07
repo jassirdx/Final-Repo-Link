@@ -1,0 +1,508 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #ffe4e9;
+  --color-foreground: #333333;
+
+  --color-card: #fff7f9;
+  --color-card-foreground: #333333;
+
+  --color-popover: #fff7f9;
+  --color-popover-foreground: #333333;
+
+  --color-primary: #e94d76;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #fdf2f4;
+  --color-secondary-foreground: #333333;
+
+  --color-muted: #fdf2f4;
+  --color-muted-foreground: #757575;
+
+  --color-accent: #e94d76;
+  --color-accent-foreground: #ffffff;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+
+  --color-border: #eeeeee;
+  --color-input: #fdf2f4;
+  --color-ring: #e94d76;
+
+  --color-chart-1: #e94d76;
+  --color-chart-2: #ff8fa3;
+  --color-chart-3: #ffb3c1;
+  --color-chart-4: #ffccd5;
+  --color-chart-5: #fff0f3;
+
+  --radius-lg: 24px;
+  --radius-md: 12px;
+  --radius-sm: 10px;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+    }
+    90% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(20px) rotate(20deg);
+      opacity: 0;
+    }
+  }
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: #eeeeee;
+  }
+
+  :root {
+    --background: #ffe4e9;
+    --foreground: #333333;
+    --card: #fff7f9;
+    --card-foreground: #333333;
+    --popover: #fff7f9;
+    --popover-foreground: #333333;
+    --primary: #e94d76;
+    --primary-foreground: #ffffff;
+    --secondary: #fdf2f4;
+    --secondary-foreground: #333333;
+    --muted: #fdf2f4;
+    --muted-foreground: #757575;
+    --accent: #e94d76;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #fafafa;
+    --border: #eeeeee;
+    --input: #fdf2f4;
+    --ring: #e94d76;
+    --radius: 24px;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: radial-gradient(circle at center, #fff7f9 0%, #ffe4e9 100%);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--muted-foreground);
+  }
+
+  .container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1400px;
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .card-shadow {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  }
+
+  .floating-heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+    animation: var(--animate-float);
+  }
+
+  .animate-confetti {
+    animation: confetti-fall linear forwards;
+  }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(0) rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.1);
+    }
+    35% {
+      transform: scale(1);
+    }
+    45% {
+      transform: scale(1.15);
+    }
+    55% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0px 6px 20px 0px rgba(232, 69, 107, 0.4), 0 0 20px 10px rgba(232, 69, 107, 0.3);
+    }
+    50% {
+      box-shadow: 0px 6px 30px 0px rgba(232, 69, 107, 0.6), 0 0 35px 18px rgba(232, 69, 107, 0.5);
+    }
+  }
+
+  @keyframes bounce-subtle {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes float-heart {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+    @keyframes bounce-in {
+      0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(30px);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05) translateY(-5px);
+      }
+      70% {
+        transform: scale(0.95) translateY(2px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes no-button-fadeout {
+      0% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        opacity: 0.5;
+        transform: scale(0.7) rotate(10deg);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0) rotate(20deg);
+      }
+    }
+
+    @keyframes yes-pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.03);
+      }
+    }
+}
+
+/* No button shake animation - 120ms micro-shake anticipation */
+.no-button-shake {
+  animation: no-button-shake 120ms ease-in-out !important;
+}
+
+@keyframes no-button-shake {
+  0%, 100% {
+    transform: translateX(0) scale(1);
+  }
+  20% {
+    transform: translateX(-3px) rotate(-1.5deg) scale(0.98);
+  }
+  40% {
+    transform: translateX(3px) rotate(1.5deg) scale(0.98);
+  }
+  60% {
+    transform: translateX(-2px) rotate(-1deg) scale(0.99);
+  }
+  80% {
+    transform: translateX(2px) rotate(1deg) scale(0.99);
+  }
+}
+
+/* No button final dramatic fadeout - slow shrink, fade, downward drift */
+.no-button-fadeout-final {
+  animation: no-button-fadeout-final 800ms ease-out forwards !important;
+}
+
+@keyframes no-button-fadeout-final {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  30% {
+    opacity: 0.7;
+    transform: scale(0.85) translateY(8px);
+  }
+  60% {
+    opacity: 0.4;
+    transform: scale(0.6) translateY(18px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) translateY(30px);
+  }
+}
+
+/* CSS-only floating hearts - GPU-accelerated with transform only */
+.floating-heart-css {
+  position: absolute;
+  bottom: -40px;
+  user-select: none;
+  will-change: transform, opacity;
+  animation: floating-heart-css-rise linear infinite;
+}
+
+@keyframes floating-heart-css-rise {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-25vh) translateX(10px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-50vh) translateX(-8px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-75vh) translateX(12px) rotate(8deg);
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(-5px) rotate(-2deg);
+    opacity: 0;
+  }
+}
+
+/* Spin animation for loading spinner */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hint message fade-in with upward motion */
+.hint-fade-in {
+  animation: hint-fade-in 400ms ease-out forwards;
+}
+
+@keyframes hint-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle pulse animation for hint */
+.hint-pulse {
+  animation: hint-fade-in 400ms ease-out forwards, hint-pulse 3s ease-in-out 400ms infinite;
+}
+
+@keyframes hint-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Final message after 12 No attempts - fade-in with scale */
+.final-message-fade {
+  animation: final-message-fade 500ms ease-out forwards;
+}
+
+@keyframes final-message-fade {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hint fadeout when replaced by destiny message */
+.hint-fadeout {
+  animation: hint-fadeout 200ms ease-out forwards;
+}
+
+@keyframes hint-fadeout {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+/* Destiny message - fade + scale in with soft pink glow pulse */
+.destiny-message {
+  animation: destiny-fade-in 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             destiny-glow-pulse 800ms cubic-bezier(0.22, 1, 0.36, 1) 500ms forwards;
+  text-shadow: 0 0 0px transparent;
+}
+
+@keyframes destiny-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes destiny-glow-pulse {
+  0% {
+    text-shadow: 0 0 0px rgba(232, 69, 107, 0);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(232, 69, 107, 0.25), 0 0 40px rgba(232, 69, 107, 0.1);
+  }
+  100% {
+    text-shadow: 0 0 0px rgba(232, 69, 107, 0);
+  }
+}
